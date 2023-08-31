@@ -12,18 +12,17 @@ def parse_xml_file(xml_file_path, filter=None):
     distance=0.0
     tree = ET.parse(xml_file_path)
     root = tree.getroot()
+    # Since the TCX file has a namespace, we can't search for just things like "Lap" and "DistanceMeters" without including the namespace
+    # This extracts the namespace for later use
     ns = re.match(r'{.*}', root.tag).group(0)
     for activity in root[0]:
-        # print(activity)
         # Check to see if the activity matches the filter
         if filter!='' and activity.attrib['Sport']!=filter:
             continue
         lap = activity.find(f'{ns}Lap')
         date = lap.attrib['StartTime']
-        # print(date)
         distance += float(lap.find(f'{ns}DistanceMeters').text)
 
-    #print(distance.text)
     return distance, date
 
 def parse_folder(folder_path, filter, format, output):
