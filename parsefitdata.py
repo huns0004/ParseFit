@@ -43,11 +43,11 @@ def parse_folder(folder_path, filter, format, output):
                 print(f"File: {filename}, NiceDate: {nicedate}, Distance: {distance}")
 
 def main():
-    parser = argparse.ArgumentParser(description="A script to extract data from Google Fit XML Files")
+    parser = argparse.ArgumentParser(description="A script to extract data from Google Fit TCX Files")
     parser.add_argument("-i", "--input", type=Path, help="Input file path", required=True)
     parser.add_argument("-f", "--filter", type=str, help="Activity filter (Biking, Walking, etc.)", default='')
     parser.add_argument("-o", "--output", type=str, help="Output file name")
-    parser.add_argument("-t", "--format", type=str, choices=['CSV', 'Text'], help="Output file name", default='Text')
+    parser.add_argument("-t", "--format", type=str, choices=['CSV', 'Text'], help="Output format", default='Text')
     args = parser.parse_args()
     if args.format!='Text' and args.output is None:
         print("Must include an output file argument when using a non-text format!")
