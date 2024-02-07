@@ -10,6 +10,7 @@ import csv
 
 def parse_xml_file(xml_file_path, filter=None):
     distance=0.0
+    totaltime=0.0
     tree = ET.parse(xml_file_path)
     root = tree.getroot()
     # Since the TCX file has a namespace, we can't search for just things like "Lap" and "DistanceMeters" without including the namespace
@@ -22,24 +23,25 @@ def parse_xml_file(xml_file_path, filter=None):
         lap = activity.find(f'{ns}Lap')
         date = lap.attrib['StartTime']
         distance += float(lap.find(f'{ns}DistanceMeters').text)
+        totaltime += float(lap.find(f'{ns}TotalTimeSeconds').text)
 
-    return distance, date
+    return distance, date, totaltime
 
 def parse_folder(folder_path, filter, format, output):
     if format=="CSV":
         # Create file and header
         csvfile = open(output, mode='w', newline='')
         csvwriter = csv.writer(csvfile)
-        csvwriter.writerow(["Filename","Date","Distance"])
+        csvwriter.writerow(["Filename","Date","Distance","Seconds"])
     for filename in os.listdir(folder_path):
         if filename.endswith(".tcx") and filter in filename:
             xml_file_path = os.path.join(folder_path, filename)
-            distance, date = parse_xml_file(xml_file_path, filter)
+            distance, date, totaltime = parse_xml_file(xml_file_path, filter)
             nicedate=parser.isoparse(date).strftime("%m/%d/%Y")
             if format=="CSV":
-                csvwriter.writerow([filename, nicedate, distance])
+                csvwriter.writerow([filename, nicedate, distance, totaltime])
             elif format=="Text":
-                print(f"File: {filename}, NiceDate: {nicedate}, Distance: {distance}")
+                print(f"File: {filename}, NiceDate: {nicedate}, Distance: {distance}, Seconds: {totaltime}")
 
 def main():
     parser = argparse.ArgumentParser(description="A script to extract data from Google Fit TCX Files")
