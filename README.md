@@ -27,7 +27,7 @@ Requirements can be installed by running `pip3 install -r ./requirements.txt`
 ## Sample Output
 
 ```
-File: 2023-06-25T10_14_03.336-05_00_PT1H26M30.682S_Biking.tcx, NiceDate: 06/25/2023, Distance: 29748.637312993083
-File: 2023-07-02T08_09_08.331-05_00_PT2H16M57.505S_Biking.tcx, NiceDate: 07/02/2023, Distance: 43849.77351833329
-File: 2023-07-23T10_10_47.441-05_00_PT1H58M50.898S_Biking.tcx, NiceDate: 07/23/2023, Distance: 35872.04551453308
+File: 2023-10-16T14_01_18.713-05_00_PT6M22.809S_Biking.tcx, NiceDate: 10/16/2023, Distance: 850.0007846775779, Seconds: 382.809
+File: 2023-10-16T14_07_41.522-05_00_PT27M21.407S_Biking.tcx, NiceDate: 10/16/2023, Distance: 8662.627824145018, Seconds: 1641.407
+File: 2023-10-17T12_55_11.358-05_00_PT2H37M5.576S_Biking.tcx, NiceDate: 10/17/2023, Distance: 50681.06278598073, Seconds: 9536.581941471999
 ```
